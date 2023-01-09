@@ -1,0 +1,32 @@
+name: indexer-blocks-are-changing
+
+on:
+  # Triggered weekly or manually in https://github.com/oasisprotocol/explorer/actions/workflows/indexer-blocks-are-changing.yml
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  consensus:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: curl https://index.oasislabs.com/v1/consensus/blocks -o consensus-blocks
+      - run: git add .
+      - run: sleep 30s
+        shell: bash
+      - run: curl https://index.oasislabs.com/v1/consensus/blocks -o consensus-blocks
+      - name: Fail if nothing changed
+        run: "! git diff --exit-code"
+
+  emerald:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: curl https://index.oasislabs.com/v1/emerald/blocks -o emerald-blocks
+      - run: git add .
+      - run: sleep 30s
+        shell: bash
+      - run: curl https://index.oasislabs.com/v1/emerald/blocks -o emerald-blocks
+      - name: Fail if nothing changed
+        run: "! git diff --exit-code"
