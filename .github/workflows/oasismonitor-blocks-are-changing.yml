@@ -1,0 +1,32 @@
+name: oasismonitor-blocks-are-changing
+
+on:
+  # Triggered daily or manually in https://github.com/oasisprotocol/explorer/actions/workflows/oasismonitor-blocks-are-changing.yml
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0,12 * * *'
+
+jobs:
+  mainnet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: curl "https://monitor.oasis.dev/data/blocks" -o blocks
+      - run: git add .
+      - run: sleep 30s
+        shell: bash
+      - run: curl "https://monitor.oasis.dev/data/blocks" -o blocks
+      - name: Fail if nothing changed
+        run: "! git diff --exit-code"
+
+  testnet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: curl "https://monitor.oasis.dev/api/testnet/data/blocks" -o blocks
+      - run: git add .
+      - run: sleep 30s
+        shell: bash
+      - run: curl "https://monitor.oasis.dev/api/testnet/data/blocks" -o blocks
+      - name: Fail if nothing changed
+        run: "! git diff --exit-code"
