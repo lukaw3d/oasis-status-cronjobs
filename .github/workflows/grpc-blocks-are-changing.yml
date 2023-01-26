@@ -1,0 +1,48 @@
+name: grpc-blocks-are-changing
+
+on:
+  # Triggered daily or manually in https://github.com/oasisprotocol/explorer/actions/workflows/grpc-blocks-are-changing.yml
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  mainnet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          curl 'https://grpc.oasis.dev/oasis-core.Consensus/GetBlock' -o blocks \
+            -H 'accept: application/grpc-web-text' \
+            -H 'content-type: application/grpc-web-text' \
+            --data-raw 'AAAAAAEA'
+      - run: git add .
+      - run: sleep 30s
+        shell: bash
+      - run: |
+          curl 'https://grpc.oasis.dev/oasis-core.Consensus/GetBlock' -o blocks \
+            -H 'accept: application/grpc-web-text' \
+            -H 'content-type: application/grpc-web-text' \
+            --data-raw 'AAAAAAEA'
+      - name: Fail if nothing changed
+        run: "! git diff --exit-code"
+
+  testnet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          curl 'https://testnet.grpc.oasis.dev/oasis-core.Consensus/GetBlock' -o blocks \
+            -H 'accept: application/grpc-web-text' \
+            -H 'content-type: application/grpc-web-text' \
+            --data-raw 'AAAAAAEA'
+      - run: git add .
+      - run: sleep 30s
+        shell: bash
+      - run: |
+          curl 'https://testnet.grpc.oasis.dev/oasis-core.Consensus/GetBlock' -o blocks \
+            -H 'accept: application/grpc-web-text' \
+            -H 'content-type: application/grpc-web-text' \
+            --data-raw 'AAAAAAEA'
+      - name: Fail if nothing changed
+        run: "! git diff --exit-code"
