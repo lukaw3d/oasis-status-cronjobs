@@ -1,0 +1,56 @@
+name: grpc-mainnet-nodes-are-responding
+
+on:
+  # Triggered daily or manually in https://github.com/oasisprotocol/explorer/actions/workflows/grpc-mainnet-nodes-are-responding.yml
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  mainnet-consensus:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          curl 'https://grpc.oasis.dev/oasis-core.Staking/Account' --fail -o response \
+            -H 'accept: application/grpc-web-text' \
+            -H 'content-type: application/grpc-web-text' \
+            --data-raw 'AAAAACWiZW93bmVyVQDI56n6hfwaDqF3oyGqwejdrOFUWmZoZWlnaHQA'
+      - name: Fail if empty response
+        run: "[ -s response ]"
+
+  mainnet-emerald:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          curl 'https://grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
+            -H 'accept: application/grpc-web-text' \
+            -H 'content-type: application/grpc-web-text' \
+            --data-raw 'AAAAAHykZGFyZ3NYH6FnYWRkcmVzc1UAyOep+oX8Gg6hd6MhqsHo3azhVFplcm91bmQb//////////9mbWV0aG9kcWFjY291bnRzLkJhbGFuY2VzanJ1bnRpbWVfaWRYIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOLqqZ/ACPh/'
+      - name: Fail if empty response
+        run: "[ -s response ]"
+
+  mainnet-sapphire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          curl 'https://grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
+            -H 'accept: application/grpc-web-text' \
+            -H 'content-type: application/grpc-web-text' \
+            --data-raw 'AAAAAHykZGFyZ3NYH6FnYWRkcmVzc1UAyOep+oX8Gg6hd6MhqsHo3azhVFplcm91bmQb//////////9mbWV0aG9kcWFjY291bnRzLkJhbGFuY2VzanJ1bnRpbWVfaWRYIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPgDBsmFjnJ5'
+      - name: Fail if empty response
+        run: "[ -s response ]"
+
+  mainnet-cipher:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          curl 'https://grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
+            -H 'accept: application/grpc-web-text' \
+            -H 'content-type: application/grpc-web-text' \
+            --data-raw 'AAAAAHykZGFyZ3NYH6FnYWRkcmVzc1UAyOep+oX8Gg6hd6MhqsHo3azhVFplcm91bmQb//////////9mbWV0aG9kcWFjY291bnRzLkJhbGFuY2VzanJ1bnRpbWVfaWRYIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOGZEZyZI3fL'
+      - name: Fail if empty response
+        run: "[ -s response ]"
