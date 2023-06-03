@@ -13,7 +13,7 @@ jobs:
       matrix:
         deploy: [staging, production]
         net: [mainnet]
-        layer: [consensus, emerald]
+        layer: [consensus, emerald, sapphire]
 
     name: '${{ matrix.deploy }} ${{ matrix.net }} ${{ matrix.layer }}'
     runs-on: ubuntu-latest
