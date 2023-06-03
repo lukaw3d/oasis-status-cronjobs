@@ -23,7 +23,7 @@ jobs:
       # https://testnet-index-staging.oasislabs.com/v1/consensus/blocks
       - run: curl "https://${{ matrix.net == 'testnet' && 'testnet-' || '' }}${{ matrix.deploy == 'staging' && 'index-staging' || 'index' }}.oasislabs.com/v1/${{ matrix.layer }}/blocks" --fail -o blocks
       - run: git add .
-      - run: sleep 30s
+      - run: sleep 120s
         shell: bash
       - run: curl "https://${{ matrix.net == 'testnet' && 'testnet-' || '' }}${{ matrix.deploy == 'staging' && 'index-staging' || 'index' }}.oasislabs.com/v1/${{ matrix.layer }}/blocks" --fail -o blocks
       - name: Fail if nothing changed
