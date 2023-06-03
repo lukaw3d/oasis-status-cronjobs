@@ -7,50 +7,23 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  consensus:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: curl "https://index.oasislabs.com/v1/consensus/blocks" --fail -o blocks
-      - run: git add .
-      - run: sleep 30s
-        shell: bash
-      - run: curl "https://index.oasislabs.com/v1/consensus/blocks" --fail -o blocks
-      - name: Fail if nothing changed
-        run: "! git diff --exit-code"
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        deploy: [staging, production]
+        net: [mainnet]
+        layer: [consensus, emerald]
 
-  emerald:
+    name: '${{ matrix.deploy }} ${{ matrix.net }} ${{ matrix.layer }}'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: curl "https://index.oasislabs.com/v1/emerald/blocks" --fail -o blocks
+      # https://index.oasislabs.com/v1/emerald/blocks
+      - run: curl "https://${{ matrix.net == 'testnet' && 'testnet-' || '' }}${{ matrix.deploy == 'staging' && 'index-staging' || 'index' }}.oasislabs.com/v1/${{ matrix.layer }}/blocks" --fail -o blocks
       - run: git add .
       - run: sleep 30s
         shell: bash
-      - run: curl "https://index.oasislabs.com/v1/emerald/blocks" --fail -o blocks
-      - name: Fail if nothing changed
-        run: "! git diff --exit-code"
-
-  consensus-staging:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: curl "https://index-staging.oasislabs.com/v1/consensus/blocks" --fail -o blocks
-      - run: git add .
-      - run: sleep 30s
-        shell: bash
-      - run: curl "https://index-staging.oasislabs.com/v1/consensus/blocks" --fail -o blocks
-      - name: Fail if nothing changed
-        run: "! git diff --exit-code"
-
-  emerald-staging:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: curl "https://index-staging.oasislabs.com/v1/emerald/blocks" --fail -o blocks
-      - run: git add .
-      - run: sleep 30s
-        shell: bash
-      - run: curl "https://index-staging.oasislabs.com/v1/emerald/blocks" --fail -o blocks
+      - run: curl "https://${{ matrix.net == 'testnet' && 'testnet-' || '' }}${{ matrix.deploy == 'staging' && 'index-staging' || 'index' }}.oasislabs.com/v1/${{ matrix.layer }}/blocks" --fail -o blocks
       - name: Fail if nothing changed
         run: "! git diff --exit-code"
