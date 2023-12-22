@@ -3,8 +3,8 @@ name: oasismonitor-blocks-are-changing
 on:
   # Triggered daily or manually in https://github.com/oasisprotocol/explorer/actions/workflows/oasismonitor-blocks-are-changing.yml
   workflow_dispatch:
-  schedule:
-    - cron: '0 0,12 * * *'
+  # schedule:
+  #   - cron: '0 0,12 * * *'
 
 jobs:
   mainnet:
