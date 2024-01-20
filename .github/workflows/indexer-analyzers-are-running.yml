@@ -1,0 +1,38 @@
+name: indexer-analyzers-are-running
+
+on:
+  # Triggered daily or manually in https://github.com/oasisprotocol/explorer/actions/workflows/oasisscan-blocks-are-changing.yml
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  tx_volume:
+    strategy:
+      fail-fast: false
+      matrix:
+        api: [nexus.oasis.io, testnet.nexus.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io]
+        layer: [consensus, emerald, sapphire]
+
+    name: 'tx_volume ${{ matrix.api }} ${{ matrix.layer }}'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          status_url="${{ matrix.layer == 'consensus' && format('https://{0}/v1/', matrix.api) || format('https://{0}/v1/{1}/status', matrix.api, matrix.layer) }}"
+          ./check_aggregate_not_far_behind.sh "$status_url" "https://${{ matrix.api }}/v1/${{ matrix.layer }}/stats/tx_volume?window_size_seconds=300&window_step_seconds=300&limit=1"
+
+  active_accounts:
+    strategy:
+      fail-fast: false
+      matrix:
+        api: [nexus.oasis.io, testnet.nexus.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io]
+        layer: [consensus, emerald, sapphire]
+
+    name: 'active_accounts ${{ matrix.api }} ${{ matrix.layer }}'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          status_url="${{ matrix.layer == 'consensus' && format('https://{0}/v1/', matrix.api) || format('https://{0}/v1/{1}/status', matrix.api, matrix.layer) }}"
+          ./check_aggregate_not_far_behind.sh "$status_url" "https://${{ matrix.api }}/v1/${{ matrix.layer }}/stats/active_accounts?window_step_seconds=300&limit=1"
