@@ -11,20 +11,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        deploy: [staging, production]
-        net: [testnet, mainnet]
+        api: [nexus.oasis.io, testnet.nexus.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io]
         layer: [consensus, emerald, sapphire]
 
-    name: '${{ matrix.deploy }} ${{ matrix.net }} ${{ matrix.layer }}'
+    name: '${{ matrix.api }} ${{ matrix.layer }}'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      # https://index.oasislabs.com/v1/emerald/blocks
-      # https://testnet-index-staging.oasislabs.com/v1/consensus/blocks
-      - run: curl "https://${{ matrix.net == 'testnet' && 'testnet-' || '' }}${{ matrix.deploy == 'staging' && 'index-staging' || 'index' }}.oasislabs.com/v1/${{ matrix.layer }}/blocks" --fail -o blocks
+      # https://nexus.oasis.io/v1/emerald/blocks
+      # https://testnet.nexus.stg.oasis.io/v1/consensus/blocks
+      - run: curl "https://${{ matrix.api }}/v1/${{ matrix.layer }}/blocks" --fail -o blocks
       - run: git add .
       - run: sleep 120s
         shell: bash
-      - run: curl "https://${{ matrix.net == 'testnet' && 'testnet-' || '' }}${{ matrix.deploy == 'staging' && 'index-staging' || 'index' }}.oasislabs.com/v1/${{ matrix.layer }}/blocks" --fail -o blocks
+      - run: curl "https://${{ matrix.api }}/v1/${{ matrix.layer }}/blocks" --fail -o blocks
       - name: Fail if nothing changed
         run: "! git diff --exit-code"
