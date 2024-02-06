@@ -7,26 +7,20 @@ on:
     - cron: '0 0,12 * * *'
 
 jobs:
-  mainnet:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: curl "https://explorer.emerald.oasis.dev/blocks?type=JSON" --fail -o blocks
-      - run: git add .
-      - run: sleep 30s
-        shell: bash
-      - run: curl "https://explorer.emerald.oasis.dev/blocks?type=JSON" --fail -o blocks
-      - name: Fail if nothing changed
-        run: "! git diff --exit-code"
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        api: [explorer.emerald.oasis.dev, testnet.explorer.emerald.oasis.dev]
 
-  testnet:
+    name: '${{ matrix.api }}'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: curl "https://testnet.explorer.emerald.oasis.dev/blocks?type=JSON" --fail -o blocks
+      - run: curl "https://${{ matrix.api }}/blocks?type=JSON" --fail -o blocks
       - run: git add .
       - run: sleep 30s
         shell: bash
-      - run: curl "https://testnet.explorer.emerald.oasis.dev/blocks?type=JSON" --fail -o blocks
+      - run: curl "https://${{ matrix.api }}/blocks?type=JSON" --fail -o blocks
       - name: Fail if nothing changed
         run: "! git diff --exit-code"
