@@ -11,14 +11,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [nexus.oasis.io, testnet.nexus.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io]
+        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io]
         layer: [consensus, emerald, sapphire]
 
     name: '${{ matrix.api }} ${{ matrix.layer }}'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      # https://nexus.oasis.io/v1/emerald/blocks
+      # https://nexus.prd.oasis.io/v1/emerald/blocks
       # https://testnet.nexus.stg.oasis.io/v1/consensus/blocks
       - run: curl "https://${{ matrix.api }}/v1/${{ matrix.layer }}/blocks" --fail -o blocks
       - run: git add .
