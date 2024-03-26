@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [old-explorer.emerald.oasis.io, testnet.old-explorer.emerald.oasis.io/, old-explorer.sapphire.oasis.io, testnet.old-explorer.sapphire.oasis.io]
+        api: [old-explorer.emerald.oasis.io, testnet.old-explorer.emerald.oasis.io, old-explorer.sapphire.oasis.io, testnet.old-explorer.sapphire.oasis.io]
 
     name: '${{ matrix.api }}'
     runs-on: ubuntu-latest
