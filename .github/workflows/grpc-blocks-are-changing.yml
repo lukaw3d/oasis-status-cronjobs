@@ -10,7 +10,7 @@ jobs:
   mainnet:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           curl 'https://grpc.oasis.dev/oasis-core.Consensus/GetBlock' --fail -o blocks \
             -H 'accept: application/grpc-web-text' \
@@ -30,7 +30,7 @@ jobs:
   testnet:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           curl 'https://testnet.grpc.oasis.dev/oasis-core.Consensus/GetBlock' --fail -o blocks \
             -H 'accept: application/grpc-web-text' \

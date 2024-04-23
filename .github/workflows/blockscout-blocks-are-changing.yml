@@ -16,7 +16,7 @@ jobs:
     name: '${{ matrix.api }}'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: curl "https://${{ matrix.api }}/blocks?type=JSON" --fail -o blocks
       - run: git add .
       - run: sleep 30s

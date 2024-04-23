@@ -10,7 +10,7 @@ jobs:
   testnet-consensus:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           curl 'https://testnet.grpc.oasis.dev/oasis-core.Staking/Account' --fail -o response \
             -H 'accept: application/grpc-web-text' \
@@ -22,7 +22,7 @@ jobs:
   testnet-emerald:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           curl 'https://testnet.grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
             -H 'accept: application/grpc-web-text' \
@@ -34,7 +34,7 @@ jobs:
   testnet-sapphire:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           curl 'https://testnet.grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
             -H 'accept: application/grpc-web-text' \
@@ -46,7 +46,7 @@ jobs:
   testnet-pontusx:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           curl 'https://testnet.grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
             -H 'accept: application/grpc-web-text' \
@@ -58,7 +58,7 @@ jobs:
   testnet-cipher:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           curl 'https://testnet.grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
             -H 'accept: application/grpc-web-text' \

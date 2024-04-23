@@ -20,7 +20,7 @@ jobs:
     name: '${{ matrix.api }} ${{ matrix.layer }}'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # https://nexus.prd.oasis.io/v1/emerald/blocks
       # https://testnet.nexus.stg.oasis.io/v1/consensus/blocks
       - run: curl "https://${{ matrix.api }}/v1/${{ matrix.layer }}/blocks" --fail -o blocks

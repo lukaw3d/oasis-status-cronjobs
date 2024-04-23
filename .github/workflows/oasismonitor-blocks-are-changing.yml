@@ -10,7 +10,7 @@ jobs:
   mainnet:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: curl "https://monitor.oasis.dev/data/blocks" --fail -o blocks
       - run: git add .
       - run: sleep 60s
@@ -22,7 +22,7 @@ jobs:
   testnet:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: curl "https://monitor.oasis.dev/api/testnet/data/blocks" --fail -o blocks
       - run: git add .
       - run: sleep 60s
