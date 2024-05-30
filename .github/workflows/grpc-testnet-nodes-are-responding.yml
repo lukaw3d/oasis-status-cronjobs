@@ -51,6 +51,18 @@ jobs:
           curl 'https://testnet.grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
             -H 'accept: application/grpc-web-text' \
             -H 'content-type: application/grpc-web-text' \
+            --data-raw 'AAAAAHykZGFyZ3NYH6FnYWRkcmVzc1UAyOep+oX8Gg6hd6MhqsHo3azhVFplcm91bmQb//////////9mbWV0aG9kcWFjY291bnRzLkJhbGFuY2VzanJ1bnRpbWVfaWRYIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASm+QccAHBp'
+      - name: Fail if empty response
+        run: "[ -s response ]"
+
+  devnet-pontusx:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          curl 'https://testnet.grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
+            -H 'accept: application/grpc-web-text' \
+            -H 'content-type: application/grpc-web-text' \
             --data-raw 'AAAAAHykZGFyZ3NYH6FnYWRkcmVzc1UAyOep+oX8Gg6hd6MhqsHo3azhVFplcm91bmQb//////////9mbWV0aG9kcWFjY291bnRzLkJhbGFuY2VzanJ1bnRpbWVfaWRYIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE/r5S60ErQh'
       - name: Fail if empty response
         run: "[ -s response ]"
