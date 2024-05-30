@@ -12,10 +12,12 @@ jobs:
       fail-fast: false
       matrix:
         api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io]
-        layer: [consensus, emerald, sapphire, pontusx]
+        layer: [consensus, emerald, sapphire, pontusx, pontusxdev]
         exclude:
           - { api: nexus.prd.oasis.io, layer: pontusx }
           - { api: nexus.stg.oasis.io, layer: pontusx }
+          - { api: nexus.prd.oasis.io, layer: pontusxdev }
+          - { api: nexus.stg.oasis.io, layer: pontusxdev }
 
     name: 'tx_volume ${{ matrix.api }} ${{ matrix.layer }}'
     runs-on: ubuntu-latest
@@ -28,10 +30,12 @@ jobs:
       fail-fast: false
       matrix:
         api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io]
-        layer: [consensus, emerald, sapphire, pontusx]
+        layer: [consensus, emerald, sapphire, pontusx, pontusxdev]
         exclude:
           - { api: nexus.prd.oasis.io, layer: pontusx }
           - { api: nexus.stg.oasis.io, layer: pontusx }
+          - { api: nexus.prd.oasis.io, layer: pontusxdev }
+          - { api: nexus.stg.oasis.io, layer: pontusxdev }
 
     name: 'active_accounts ${{ matrix.api }} ${{ matrix.layer }}'
     runs-on: ubuntu-latest
