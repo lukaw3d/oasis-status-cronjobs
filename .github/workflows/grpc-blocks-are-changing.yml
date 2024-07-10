@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          curl 'https://grpc.oasis.dev/oasis-core.Consensus/GetBlock' --fail -o blocks \
+          curl 'https://grpc.oasis.io/oasis-core.Consensus/GetBlock' --fail -o blocks \
             -H 'accept: application/grpc-web-text' \
             -H 'content-type: application/grpc-web-text' \
             --data-raw 'AAAAAAEA'
@@ -20,7 +20,7 @@ jobs:
       - run: sleep 30s
         shell: bash
       - run: |
-          curl 'https://grpc.oasis.dev/oasis-core.Consensus/GetBlock' --fail -o blocks \
+          curl 'https://grpc.oasis.io/oasis-core.Consensus/GetBlock' --fail -o blocks \
             -H 'accept: application/grpc-web-text' \
             -H 'content-type: application/grpc-web-text' \
             --data-raw 'AAAAAAEA'
@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          curl 'https://testnet.grpc.oasis.dev/oasis-core.Consensus/GetBlock' --fail -o blocks \
+          curl 'https://testnet.grpc.oasis.io/oasis-core.Consensus/GetBlock' --fail -o blocks \
             -H 'accept: application/grpc-web-text' \
             -H 'content-type: application/grpc-web-text' \
             --data-raw 'AAAAAAEA'
@@ -40,7 +40,7 @@ jobs:
       - run: sleep 30s
         shell: bash
       - run: |
-          curl 'https://testnet.grpc.oasis.dev/oasis-core.Consensus/GetBlock' --fail -o blocks \
+          curl 'https://testnet.grpc.oasis.io/oasis-core.Consensus/GetBlock' --fail -o blocks \
             -H 'accept: application/grpc-web-text' \
             -H 'content-type: application/grpc-web-text' \
             --data-raw 'AAAAAAEA'

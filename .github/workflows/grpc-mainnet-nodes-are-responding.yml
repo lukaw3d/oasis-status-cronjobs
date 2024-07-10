@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          curl 'https://grpc.oasis.dev/oasis-core.Staking/Account' --fail -o response \
+          curl 'https://grpc.oasis.io/oasis-core.Staking/Account' --fail -o response \
             -H 'accept: application/grpc-web-text' \
             -H 'content-type: application/grpc-web-text' \
             --data-raw 'AAAAACWiZW93bmVyVQDI56n6hfwaDqF3oyGqwejdrOFUWmZoZWlnaHQA'
@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          curl 'https://grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
+          curl 'https://grpc.oasis.io/oasis-core.RuntimeClient/Query' --fail -o response \
             -H 'accept: application/grpc-web-text' \
             -H 'content-type: application/grpc-web-text' \
             --data-raw 'AAAAAHykZGFyZ3NYH6FnYWRkcmVzc1UAyOep+oX8Gg6hd6MhqsHo3azhVFplcm91bmQb//////////9mbWV0aG9kcWFjY291bnRzLkJhbGFuY2VzanJ1bnRpbWVfaWRYIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOLqqZ/ACPh/'
@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          curl 'https://grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
+          curl 'https://grpc.oasis.io/oasis-core.RuntimeClient/Query' --fail -o response \
             -H 'accept: application/grpc-web-text' \
             -H 'content-type: application/grpc-web-text' \
             --data-raw 'AAAAAHykZGFyZ3NYH6FnYWRkcmVzc1UAyOep+oX8Gg6hd6MhqsHo3azhVFplcm91bmQb//////////9mbWV0aG9kcWFjY291bnRzLkJhbGFuY2VzanJ1bnRpbWVfaWRYIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPgDBsmFjnJ5'
@@ -50,7 +50,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          curl 'https://grpc.oasis.dev/oasis-core.RuntimeClient/Query' --fail -o response \
+          curl 'https://grpc.oasis.io/oasis-core.RuntimeClient/Query' --fail -o response \
             -H 'accept: application/grpc-web-text' \
             -H 'content-type: application/grpc-web-text' \
             --data-raw 'AAAAAHykZGFyZ3NYH6FnYWRkcmVzc1UAyOep+oX8Gg6hd6MhqsHo3azhVFplcm91bmQb//////////9mbWV0aG9kcWFjY291bnRzLkJhbGFuY2VzanJ1bnRpbWVfaWRYIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOGZEZyZI3fL'
