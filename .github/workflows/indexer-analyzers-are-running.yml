@@ -12,10 +12,10 @@ jobs:
       fail-fast: false
       matrix:
         api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io]
-        layer: [consensus, emerald, sapphire, pontusx, pontusxdev]
+        layer: [consensus, emerald, sapphire, pontusxtest, pontusxdev]
         exclude:
-          - { api: nexus.prd.oasis.io, layer: pontusx }
-          - { api: nexus.stg.oasis.io, layer: pontusx }
+          - { api: nexus.prd.oasis.io, layer: pontusxtest }
+          - { api: nexus.stg.oasis.io, layer: pontusxtest }
           - { api: nexus.prd.oasis.io, layer: pontusxdev }
           - { api: nexus.stg.oasis.io, layer: pontusxdev }
 
@@ -30,10 +30,10 @@ jobs:
       fail-fast: false
       matrix:
         api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io]
-        layer: [consensus, emerald, sapphire, pontusx, pontusxdev]
+        layer: [consensus, emerald, sapphire, pontusxtest, pontusxdev]
         exclude:
-          - { api: nexus.prd.oasis.io, layer: pontusx }
-          - { api: nexus.stg.oasis.io, layer: pontusx }
+          - { api: nexus.prd.oasis.io, layer: pontusxtest }
+          - { api: nexus.stg.oasis.io, layer: pontusxtest }
           - { api: nexus.prd.oasis.io, layer: pontusxdev }
           - { api: nexus.stg.oasis.io, layer: pontusxdev }
 
