@@ -1,0 +1,21 @@
+name: testnet-faucet-is-succeeding
+
+on:
+  # Triggered daily or manually in https://github.com/oasisprotocol/explorer/actions/workflows/testnet-faucet-is-succeeding.yml
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  consensus:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node ./check_latest_successful_tx_not_far_behind.mjs "https://testnet.nexus.oasis.io/v1/consensus/transactions?limit=10&offset=0&rel=oasis1qzna6nq9kuktjmxx2s84z38eysqyts84jc9lgdg2"
+
+  sapphire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node ./check_latest_successful_tx_not_far_behind.mjs "https://testnet.nexus.oasis.io/v1/sapphire/transactions?limit=10&offset=0&rel=oasis1qzna6nq9kuktjmxx2s84z38eysqyts84jc9lgdg2"
+      - run: node ./check_latest_successful_event_not_far_behind.mjs "https://testnet.nexus.oasis.io/v1/sapphire/events?offset=0&limit=10&rel=oasis1qzna6nq9kuktjmxx2s84z38eysqyts84jc9lgdg2&type=consensus_accounts.deposit"
