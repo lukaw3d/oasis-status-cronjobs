@@ -42,3 +42,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: ./check_aggregate_not_far_behind.sh "${{ matrix.layer == 'consensus' && format('https://{0}/v1/', matrix.api) || format('https://{0}/v1/{1}/status', matrix.api, matrix.layer) }}" "https://${{ matrix.api }}/v1/${{ matrix.layer }}/stats/active_accounts?window_step_seconds=300&limit=1"
+
+  epochs:
+    strategy:
+      fail-fast: false
+      matrix:
+        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io]
+    name: 'epoch ${{ matrix.api }} consensus'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./check_epoch_not_far_behind.sh "${{ format('https://{0}/v1/', matrix.api) }}" "https://${{ matrix.api }}/v1/consensus/epochs?limit=1"
+
+  validator_history:
+    strategy:
+      fail-fast: false
+      matrix:
+        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io]
+    name: 'validator_history ${{ matrix.api }} consensus'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./check_validator_history_not_far_behind.sh "https://${{ matrix.api }}/v1/consensus/epochs?limit=1" "https://${{ matrix.api }}/v1/consensus/validators/${{ contains(matrix.api, 'testnet') && 'oasis1qqv25adrld8jjquzxzg769689lgf9jxvwgjs8tha' || 'oasis1qq3xrq0urs8qcffhvmhfhz4p0mu7ewc8rscnlwxe' }}/history?limit=1"
