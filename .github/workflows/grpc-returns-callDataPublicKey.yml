@@ -1,0 +1,34 @@
+name: grpc-returns-callDataPublicKey
+
+on:
+  # Triggered daily or manually in https://github.com/oasisprotocol/explorer/actions/workflows/grpc-blocks-are-changing.yml
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  mainnet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          response=$(curl -sS --fail -X POST -H 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"oasis_callDataPublicKey","params":[],"id":1}' https://sapphire.oasis.io)
+          [[ $response == *'"key":'* ]]
+      # core.CallDataPublicKey
+      # https://github.com/oasisprotocol/sapphire-paratime/blob/52b72661e8e020b7d1606e68755bebe9b840afec/clients/js/src/constants.ts#L8
+      - run: |
+          response=$(curl -sS --fail -H 'content-type: application/json' --data-raw '[{"method":"eth_call","params":[{"to":"0x0100000000000000000000000000000000000103","data":"0x000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000016636f72652e43616c6c446174615075626c69634b6579000000000000000000000000000000000000000000000000000000000000000000000000000000000001f600000000000000000000000000000000000000000000000000000000000000"},"latest"],"id":7,"jsonrpc":"2.0"}]' https://sapphire.oasis.io/)
+          [[ $response == *'7075626c69635f6b6579'* ]] # hex("public_key")
+
+  testnet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          response=$(curl -sS --fail -X POST -H 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"oasis_callDataPublicKey","params":[],"id":1}' https://testnet.sapphire.oasis.io)
+          [[ $response == *'"key":'* ]]
+      # core.CallDataPublicKey
+      # https://github.com/oasisprotocol/sapphire-paratime/blob/52b72661e8e020b7d1606e68755bebe9b840afec/clients/js/src/constants.ts#L8
+      - run: |
+          response=$(curl -sS --fail -H 'content-type: application/json' --data-raw '[{"method":"eth_call","params":[{"to":"0x0100000000000000000000000000000000000103","data":"0x000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000016636f72652e43616c6c446174615075626c69634b6579000000000000000000000000000000000000000000000000000000000000000000000000000000000001f600000000000000000000000000000000000000000000000000000000000000"},"latest"],"id":7,"jsonrpc":"2.0"}]' https://testnet.sapphire.oasis.io/)
+          [[ $response == *'7075626c69635f6b6579'* ]] # hex("public_key")
