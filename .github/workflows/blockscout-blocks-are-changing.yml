@@ -4,7 +4,7 @@ on:
   # Triggered daily or manually in https://github.com/oasisprotocol/explorer/actions/workflows/blockscout-blocks-are-changing.yml
   workflow_dispatch:
   schedule:
-    - cron: '0 0,12 * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   check:
