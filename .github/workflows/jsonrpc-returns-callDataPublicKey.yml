@@ -1,4 +1,4 @@
-name: grpc-returns-callDataPublicKey
+name: jsonrpc-returns-callDataPublicKey
 
 on:
   # Triggered daily or manually in https://github.com/oasisprotocol/explorer/actions/workflows/grpc-blocks-are-changing.yml
