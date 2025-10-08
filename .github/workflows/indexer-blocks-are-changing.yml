@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io]
+        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io, nexus.prg-gke1.oasis.io, nexus-testnet.prg-gke1.oasis.io]
         layer: [consensus, emerald, sapphire, pontusxtest, pontusxdev]
         exclude:
           - { api: nexus.prd.oasis.io, layer: pontusxtest }
@@ -20,6 +20,8 @@ jobs:
           - { api: nexus.stg.oasis.io, layer: pontusxdev }
           - { api: nexus-blue-mainnet.prd0-gke.oasis.io, layer: pontusxtest }
           - { api: nexus-blue-mainnet.prd0-gke.oasis.io, layer: pontusxdev }
+          - { api: nexus.prg-gke1.oasis.io, layer: pontusxtest }
+          - { api: nexus.prg-gke1.oasis.io, layer: pontusxdev }
 
     name: '${{ matrix.api }} ${{ matrix.layer }}'
     runs-on: ubuntu-latest
