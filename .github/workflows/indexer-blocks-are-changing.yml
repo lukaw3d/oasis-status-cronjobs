@@ -11,13 +11,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io, nexus.prg-gke1.oasis.io, nexus-testnet.prg-gke1.oasis.io]
+        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io, nexus.prg-gke1.oasis.io, nexus-testnet.prg-gke1.oasis.io]
         layer: [consensus, emerald, sapphire, pontusxtest, pontusxdev]
         exclude:
           - { api: nexus.prd.oasis.io, layer: pontusxtest }
-          - { api: nexus.stg.oasis.io, layer: pontusxtest }
           - { api: nexus.prd.oasis.io, layer: pontusxdev }
-          - { api: nexus.stg.oasis.io, layer: pontusxdev }
           - { api: nexus-blue-mainnet.prd0-gke.oasis.io, layer: pontusxtest }
           - { api: nexus-blue-mainnet.prd0-gke.oasis.io, layer: pontusxdev }
           - { api: nexus.prg-gke1.oasis.io, layer: pontusxtest }
@@ -28,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # https://nexus.prd.oasis.io/v1/emerald/blocks
-      # https://testnet.nexus.stg.oasis.io/v1/consensus/blocks
+      # https://testnet.nexus.prd.oasis.io/v1/consensus/blocks
       - run: curl "https://${{ matrix.api }}/v1/${{ matrix.layer }}/blocks" --fail -o blocks
       - run: git add .
       - run: sleep 120s

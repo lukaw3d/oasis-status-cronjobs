@@ -11,13 +11,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io, nexus.prg-gke1.oasis.io, nexus-testnet.prg-gke1.oasis.io]
+        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io, nexus.prg-gke1.oasis.io, nexus-testnet.prg-gke1.oasis.io]
         layer: [consensus, emerald, sapphire, pontusxtest, pontusxdev]
         exclude:
           - { api: nexus.prd.oasis.io, layer: pontusxtest }
-          - { api: nexus.stg.oasis.io, layer: pontusxtest }
           - { api: nexus.prd.oasis.io, layer: pontusxdev }
-          - { api: nexus.stg.oasis.io, layer: pontusxdev }
           - { api: nexus-blue-mainnet.prd0-gke.oasis.io, layer: pontusxtest }
           - { api: nexus-blue-mainnet.prd0-gke.oasis.io, layer: pontusxdev }
           - { api: nexus.prg-gke1.oasis.io, layer: pontusxtest }
@@ -33,13 +31,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io]
+        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io]
         layer: [consensus, emerald, sapphire, pontusxtest, pontusxdev]
         exclude:
           - { api: nexus.prd.oasis.io, layer: pontusxtest }
-          - { api: nexus.stg.oasis.io, layer: pontusxtest }
           - { api: nexus.prd.oasis.io, layer: pontusxdev }
-          - { api: nexus.stg.oasis.io, layer: pontusxdev }
           - { api: nexus-blue-mainnet.prd0-gke.oasis.io, layer: pontusxtest }
           - { api: nexus-blue-mainnet.prd0-gke.oasis.io, layer: pontusxdev }
 
@@ -53,7 +49,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io]
+        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io]
     name: 'epoch ${{ matrix.api }} consensus'
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +60,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus.stg.oasis.io, testnet.nexus.stg.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io]
+        api: [nexus.prd.oasis.io, testnet.nexus.prd.oasis.io, nexus-blue-mainnet.prd0-gke.oasis.io, nexus-blue-testnet.prd0-gke.oasis.io]
     name: 'validator_history ${{ matrix.api }} consensus'
     runs-on: ubuntu-latest
     steps:
